@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Tech Digest</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-blue-600 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div>
+                        <h1 class="text-3xl font-bold">📰 Daily Tech Digest</h1>
+                        <p class="text-blue-100 mt-2">최신 기술 트렌드와 IT 뉴스를 한눈에</p>
+                    </div>
+                    <!-- 날짜 필터 -->
+                    <div class="flex items-center gap-2">
+                        <button 
+                            id="prev-date" 
+                            class="bg-blue-700 hover:bg-blue-800 px-3 py-2 rounded-lg transition"
+                            title="이전 날짜 (←)"
+                        >
+                            ← 이전
+                        </button>
+                        <select 
+                            id="date-filter" 
+                            class="bg-blue-700 text-white px-4 py-2 rounded-lg border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                        >
+                            <option>날짜 선택...</option>
+                        </select>
+                        <button 
+                            id="next-date" 
+                            class="bg-blue-700 hover:bg-blue-800 px-3 py-2 rounded-lg transition"
+                            title="다음 날짜 (→)"
+                        >
+                            다음 →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <!-- Loading State -->
+            <div id="loading" class="text-center py-12">
+                <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                <p class="mt-4 text-gray-600">데이터를 불러오는 중...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error" class="hidden bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+                <p class="text-red-600 font-semibold">데이터를 불러오는데 실패했습니다.</p>
+                <p class="text-red-500 text-sm mt-2">Supabase 설정을 확인해주세요.</p>
+            </div>
+
+            <!-- Content -->
+            <div id="content" class="hidden">
+                <!-- Daily Summary -->
+                <section id="summary-section" class="mb-8 bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">📝 오늘의 트렌드 요약</h2>
+                    <p id="daily-summary" class="text-gray-700 leading-relaxed"></p>
+                </section>
+
+                <!-- Hot Technologies -->
+                <section id="hot-tech-section" class="mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">🔥 주목할 기술</h2>
+                    <div id="hot-technologies" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </section>
+
+                <!-- GitHub Trending -->
+                <section class="mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">🔥 GitHub Trending</h2>
+                    <div id="trending-repos" class="space-y-4"></div>
+                </section>
+
+                <!-- IT News -->
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">📰 IT 뉴스</h2>
+                    <div id="news-articles" class="space-y-4"></div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white mt-12">
+            <div class="container mx-auto px-4 py-6 text-center">
+                <p class="text-gray-400">
+                    © 2025 Daily Tech Digest |
+                    <span id="last-updated"></span>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
